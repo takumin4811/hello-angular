@@ -1,0 +1,9 @@
+<!--*ngIf の右辺の式が truthy であるときだけ、内側のテンプレートが評価されます。-->
+<div *ngIf="hero">
+  <h2>{{hero.name}} details!</h2>
+  <div><label>id: </label>{{hero.id}}</div>
+  <div>
+    <label>name: </label>
+    <input type="text" [(ngModel)]="hero.name">
+  </div>
+</div>

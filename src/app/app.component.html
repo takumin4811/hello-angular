@@ -8,13 +8,6 @@
   </li>
 </ul>
 
-<!--*ngIf の右辺の式が truthy であるときだけ、内側のテンプレートが評価されます。-->
-<div *ngIf="selectedHero">
-  <h2>{{selectedHero.name}} details!</h2>
-  <div><label>id: </label>{{selectedHero.id}}</div>
-  <div>
-    <label>name: </label>
-    <input type="text" [(ngModel)]="selectedHero.name">
-  </div>
-</div>
 
+<app-hero-detail [hero]="selectedHero">
+  
