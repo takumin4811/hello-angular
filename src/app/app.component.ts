@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Hero } from "./hero";
-
+import { HeroService } from './hero.service';
 
 // appComponentの、HTML上での挿入位置の目印（セレクタ）および、コンポーネントのビューの場所を定義。
 @Component({
@@ -11,27 +11,32 @@ import { Hero } from "./hero";
 
 // appComponentはメインのコンポーネントクラス。状態変数として、ヒーロー一覧、選択済のHero、onSelect メソッドを持つ。
 export class AppComponent {
-  title:string = 'Tour of Heroes';
-  heroes:Hero[]=HEROES;
+  title: string = 'Tour of Heroes';
+  heroes: Hero[];
 
-  selectedHero :Hero;
+  selectedHero: Hero;
 
-  onSelect(hero:Hero):void{
-    this.selectedHero=hero;
+  onSelect(hero: Hero): void {
+    this.selectedHero = hero;
   }
+
+  constructor(private heroService: HeroService) { }
+
+  getHeroes(): void {
+    // this.heroes=this.heroService.getHeroes();
+    this.heroService.getHeroes().then(heroes => this.heroes = heroes);
+  }
+
+
+
+
+  // コンポーネントに ngOnInit ライフサイクルフックが実装してあれば、 Angularが呼び出してくれます。 
+  // ngOnInit メソッドはコンポーネントの初期化のための正しいタイミングで呼び出されます。
+  ngOnInit(): void {
+    this.getHeroes();
+  }
+
+
 }
 
-
-const HEROES: Hero[] = [
-  { id: 11, name: 'Mr. Nice' },
-  { id: 12, name: 'Narco' },
-  { id: 13, name: 'Bombasto' },
-  { id: 14, name: 'Celeritas' },
-  { id: 15, name: 'Magneta' },
-  { id: 16, name: 'RubberMan' },
-  { id: 17, name: 'Dynama' },
-  { id: 18, name: 'Dr IQ' },
-  { id: 19, name: 'Magma' },
-  { id: 20, name: 'Tornado' }
-];
 
